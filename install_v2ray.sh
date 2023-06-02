@@ -1841,7 +1841,7 @@ menu() {
     echo -e "  感谢${GREEN}网络跳越${PLAIN}，${GREEN}ifeng${PLAIN} 。"	
     echo -e "  该脚本默认支持BBR加速。"
     echo -e "  目的是帮助新人快速搭建"						
-    echo -e "  由${GREEN}慕平科技阿岩${PLAIN}修改"
+    echo -e "  由${GREEN}MPKJ阿岩${PLAIN}修改"
     echo -e " ${GREEN}TG群${PLAIN}: https://t.me/beautybox99"
     echo "#############################################################"
     echo -e "  ${GREEN}1.${PLAIN}  ${RED}安装V2ray-伪装-防封${PLAIN}"

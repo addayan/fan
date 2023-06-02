@@ -1843,11 +1843,11 @@ showLog() {
 menu() {
     clear
     echo "#############################################################"
-    echo -e "#                   ${RED}v2ray一键安装脚本${PLAIN}                       #"
-        echo -e "# ${GREEN}阿岩${PLAIN} 修改一键安装脚本                                #"
-    echo -e "#  帮助新人快速使用 						#"
-    echo -e "#  向${GREEN}网络跳越${PLAIN}致敬！！！                                     #"
-    echo -e "#  该脚本原作者为${GREEN}网络跳越${PLAIN}，已经停止维护。该脚本默认     #"	
+    echo -e "#                   ${RED}v2ray一键安装脚本${PLAIN}                   #"
+    echo -e "# ${RED}阿岩${PLAIN} 修改一键安装脚本                                  #"
+    echo -e "#  目的是帮助新人快速使用 		                                 #"
+    echo -e "                                                                     #"
+    echo -e "#  该脚本原作者为${GREEN}网络跳越${PLAIN}，已经停止维护。该脚本默认       #"	
     echo -e "#  支持BBR加速，支持ipv6连接。在${GREEN}ifeng${PLAIN}修改版基础上修改。  #"	
     echo -e "#                                                           #"	
     echo "#############################################################"

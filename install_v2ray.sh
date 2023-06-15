@@ -1844,7 +1844,7 @@ menu() {
     echo -e "  由${GREEN}MPKJ阿岩${PLAIN}修改"
     echo -e " ${GREEN}TG群${PLAIN}: https://t.me/beautybox99"
     echo "#############################################################"
-    echo -e "  ${GREEN}1.${PLAIN}  ${RED}安装V2ray-伪装-防封${PLAIN}"
+    echo -e "  ${GREEN}1.${PLAIN}  ${RED}安装V2ray${PLAIN}"
     echo -e "  ${GREEN}2.${PLAIN}  卸载V2ray${PLAIN}"
     echo -e "  ${GREEN}3.${PLAIN}  启动V2ray"
     echo -e "  ${GREEN}4.${PLAIN}  重启V2ray"

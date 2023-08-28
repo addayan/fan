@@ -526,7 +526,7 @@ module_hotfixes=true' > /etc/yum.repos.d/nginx.repo
         fi
         $CMD_INSTALL nginx
         if [[ "$?" != "0" ]]; then
-            colorEcho $RED " Nginx安装失败，请联系阿岩"
+            colorEcho $RED " Nginx安装失败"
             exit 1
         fi
         systemctl enable nginx
@@ -601,7 +601,7 @@ getCert() {
 		fi		
 		
         [[ -f ~/.acme.sh/${DOMAIN}_ecc/ca.cer ]] || {
-            colorEcho $RED " 获取证书失败，请联系阿岩"
+            colorEcho $RED " 获取证书失败"
             exit 1
         }
         KEY_FILE="/etc/v2ray/${DOMAIN}.key"
@@ -611,7 +611,7 @@ getCert() {
             --fullchain-file $CERT_FILE \
             --reloadcmd     "service nginx force-reload"
         [[ -f $CERT_FILE && -f $KEY_FILE ]] || {
-            colorEcho $RED " 获取证书失败，请联系阿岩"
+            colorEcho $RED " 获取证书失败"
             exit 1
         }
     else

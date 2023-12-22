@@ -295,26 +295,21 @@ getData() {
             CERT_FILE="/etc/v2ray/${DOMAIN}.pem"
             KEY_FILE="/etc/v2ray/${DOMAIN}.key"
         else
-            resolve=$(curl -sm8 ipget.net/?ip=${DOMAIN})
-
-            # 检查 resolve 是否为有效的 IPv4 或 IPv6 地址
-            if ! [[ $resolve =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]] && ! [[ $resolve =~ ^[0-9a-fA-F:]+$ ]]; then
-                colorEcho ${BLUE} "域名解析失败或解析的不是有效的IP地址，请检查域名解析记录或稍后再试。"
-                exit 1
-            fi
-
-            # 检查解析的IP是否与服务器IP匹配
+            resolve=`curl -sm8 ipget.net/?ip=${DOMAIN}`
             if [ "$resolve" != "$v4" ] && [ "$resolve" != "$v6" ]; then
-                colorEcho ${RED} "域名未解析到当前服务器IP(${BLUE}ipv4:${RED}${v4} / ${BLUE}ipv6:${RED}${v6})"
+		if ! [[ $resolve =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]] && ! [[ $resolve =~ ^[0-9a-fA-F:]+$ ]]; 
+  		then
+                colorEcho ${BLUE} "域名解析失败，请添加域名解析记录或等待DNS同步，稍后再试。"
                 exit 1
-            else
-                colorEcho ${BLUE} "${DOMAIN} 解析结果：${resolve}"
+            	else
+			colorEcho ${BLUE}  " ${DOMAIN} 解析结果：${resolve}"
+		fi
+                colorEcho ${RED}  " 域名未解析到当前服务器IP("${BLUE}"ipv4:"${RED}"${v4} / "${BLUE}"ipv6:"${RED}"${v6} )!"
+                exit 1
             fi
         fi
     fi
 echo ""
-}
-
 if [[ "$(needNginx)" = "no" ]]; then
     if [[ "$TLS" = "true" ]]; then
         while true; do

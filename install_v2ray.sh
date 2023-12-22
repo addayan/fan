@@ -38,8 +38,8 @@ OS=`hostnamectl | grep -i system | cut -d: -f2`
 # 检查服务器网络环境
 
 checkv4v6(){
-    v6=$(curl -s6m8 ipget.net -k)
-    v4=$(curl -s4m8 ipget.net -k)
+    v6=$(curl -s6m8 api64.ipify.org -k)
+    v4=$(curl -s4m8 api64.ipify.org -k)
 }
 
 colorEcho $YELLOW "脚本启动中，请稍等" && sleep 1
@@ -290,27 +290,23 @@ getData() {
         DOMAIN=${DOMAIN,,}
         colorEcho ${BLUE}  " 伪装域名(host)：$DOMAIN"
 
-       if [[ -f ~/v2ray.pem && -f ~/v2ray.key ]]; then
-    colorEcho ${BLUE} "检测到自有证书，将使用其部署"
-    CERT_FILE="/etc/v2ray/${DOMAIN}.pem"
-    KEY_FILE="/etc/v2ray/${DOMAIN}.key"
-else
-    resolve=$(curl -sm8 ipget.net/?ip=${DOMAIN})
-    # 使用正则表达式检查resolve是否是一个有效的IPv4或IPv6地址
-    if ! [[ $resolve =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]] && ! [[ $resolve =~ ^[0-9a-fA-F:]+$ ]]; then
-        colorEcho ${BLUE} "域名解析失败或解析的不是有效的IP地址，请检查域名解析记录或稍后再试。"
-        exit 1
-    fi
-
-    # 检查解析的IP是否是当前服务器的IP
-    if [ "$resolve" != "$v4" ] && [ "$resolve" != "$v6" ]; then
-        colorEcho ${RED} "域名未解析到当前服务器IP(${BLUE}ipv4:${RED}${v4} / ${BLUE}ipv6:${RED}${v6})"
-        exit 1
-    else
-        colorEcho ${BLUE} "${DOMAIN} 解析结果：${resolve}"
-    fi
-fi
-
+        if [[ -f ~/v2ray.pem && -f ~/v2ray.key ]]; then
+            colorEcho ${BLUE}  " 检测到自有证书，将使用其部署"
+            CERT_FILE="/etc/v2ray/${DOMAIN}.pem"
+            KEY_FILE="/etc/v2ray/${DOMAIN}.key"
+        else
+            resolve=`curl -sm8 ipget.net/?ip=${DOMAIN}`
+            if [ "$resolve" != "$v4" ] && [ "$resolve" != "$v6" ]; then
+            if ! [[ $resolve =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]] && ! [[ $resolve =~ ^[0-9a-fA-F:]+$ ]]; then
+                colorEcho ${BLUE} "域名解析失败或解析的不是有效的IP地址，请检查域名解析记录或稍后再试。"
+                exit 1
+            fi
+			colorEcho ${BLUE}  " ${DOMAIN} 解析结果：${resolve}"
+		fi
+                colorEcho ${RED}  " 域名未解析到当前服务器IP("${BLUE}"ipv4:"${RED}"${v4} / "${BLUE}"ipv6:"${RED}"${v6} )!"
+                exit 1
+            fi
+        fi
     fi
 echo ""
 if [[ "$(needNginx)" = "no" ]]; then

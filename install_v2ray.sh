@@ -38,8 +38,8 @@ OS=`hostnamectl | grep -i system | cut -d: -f2`
 # 检查服务器网络环境
 
 checkv4v6(){
-    v6=$(curl -s6m8 curl ipget.net/ -k)
-    v4=$(curl -s4m8 curl ipget.net/ -k)
+    v6=$(curl -s6m8 api64.ipify.org -k)
+    v4=$(curl -s4m8 api64.ipify.org -k)
 }
 
 colorEcho $YELLOW "脚本启动中，请稍等" && sleep 1

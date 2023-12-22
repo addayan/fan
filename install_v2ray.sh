@@ -307,8 +307,7 @@ getData() {
                 exit 1
             fi
         fi
-    fi
-echo ""
+    echo ""
 if [[ "$(needNginx)" = "no" ]]; then
     if [[ "$TLS" = "true" ]]; then
         while true; do
